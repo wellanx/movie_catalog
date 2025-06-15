@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Каталог фильмов</title>
+  <meta charset="UTF-8" />
+  <title>Каталог фильмов с поиском и фильтрами</title>
 </head>
 <body>
 
@@ -16,28 +16,43 @@
   </header>
 
   <main>
+    <section id="filters">
+      <h2>Поиск и фильтры</h2>
+      <label>
+        Поиск по названию: 
+        <input type="text" id="search-title" placeholder="Введите название">
+      </label><br><br>
+      <label>
+        Фильтр по жанру: 
+        <input type="text" id="search-genre" placeholder="Введите жанр">
+      </label>
+    </section>
+
     <section id="movies">
       <h2>Список фильмов</h2>
-      <ul>
-        <li>
+      <ul id="movie-list">
+        <li data-title="Интерстеллар" data-genre="Фантастика, Драма">
           <strong>Интерстеллар</strong> (2014) — Фантастика, Драма<br>
           Описание: Группа исследователей путешествует через червоточину в поисках нового дома для человечества.<br>
           <button class="fav-btn">Добавить в избранное</button>
         </li>
-        <li>
+        <li data-title="Матрица" data-genre="Фантастика, Боевик">
           <strong>Матрица</strong> (1999) — Фантастика, Боевик<br>
           Описание: Программист узнаёт, что его мир — это компьютерная симуляция.<br>
           <button class="fav-btn">Добавить в избранное</button>
         </li>
-        <li>
+        <li data-title="Паразиты" data-genre="Триллер, Драма">
           <strong>Паразиты</strong> (2019) — Триллер, Драма<br>
           Описание: Семья бедняков внедряется в дом богатых людей, что приводит к неожиданным последствиям.<br>
           <button class="fav-btn">Добавить в избранное</button>
         </li>
       </ul>
-           <h2>О сайте</h2>
+    </section>
+
+    <section id="about">
+      <h2>О сайте</h2>
       <p>
-        Это каталог фильмов. Здесь вы можете просматривать список фильмов и добавлять новые.
+        Это простой каталог фильмов. Здесь вы можете просматривать список фильмов, добавлять их в избранное и фильтровать по названию и жанру.
       </p>
     </section>
   </main>
@@ -46,4 +61,45 @@
     <hr>
     <p>&copy; 2025 Каталог фильмов</p>
   </footer>
-    </section>
+
+  <script>
+    // Обработчик кнопок избранного
+    document.querySelectorAll('.fav-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        if (this.textContent === 'Добавить в избранное') {
+          this.textContent = 'В избранном';
+        } else {
+          this.textContent = 'Добавить в избранное';
+        }
+      });
+    });
+
+    // Функция фильтрации фильмов
+    function filterMovies() {
+      const titleFilter = document.getElementById('search-title').value.toLowerCase();
+      const genreFilter = document.getElementById('search-genre').value.toLowerCase();
+
+      const movies = document.querySelectorAll('#movie-list li');
+      movies.forEach(movie => {
+        const title = movie.getAttribute('data-title').toLowerCase();
+        const genre = movie.getAttribute('data-genre').toLowerCase();
+
+        const matchesTitle = title.includes(titleFilter);
+        const matchesGenre = genre.includes(genreFilter);
+
+        if (matchesTitle && matchesGenre) {
+          movie.style.display = '';
+        } else {
+          movie.style.display = 'none';
+        }
+      });
+    }
+
+    // События для полей поиска
+    document.getElementById('search-title').addEventListener('input', filterMovies);
+    document.getElementById('search-genre').addEventListener('input', filterMovies);
+  </script>
+
+</body>
+</html>
+
