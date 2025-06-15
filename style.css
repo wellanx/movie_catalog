@@ -187,3 +187,25 @@
       padding: 0 1rem;
     }
   }
+  /* Добавьте эти стили к существующим */
+
+.movie-poster {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  #movie-list li:hover .movie-poster {
+    transform: scale(1.02);
+  }
+  
+  /* Для мобильных устройств */
+  @media (max-width: 768px) {
+    .movie-poster {
+      height: 300px;
+    }
+  }
