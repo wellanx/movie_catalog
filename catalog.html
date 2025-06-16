@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="style.css">
   <title>Каталог фильмов</title>
+  <!-- Подключаем jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 
@@ -31,7 +33,6 @@
 
     <section id="movies">
       <h2>Список фильмов</h2>
-
       <ul id="movie-list">        
         <li data-title="Начало" data-genre="Фантастика, Триллер">
           <img src="https://i.pinimg.com/originals/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg" alt="Начало" class="movie-poster">
@@ -45,7 +46,6 @@
           <div>Рейтинг: 8.8</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Интерстеллар" data-genre="Фантастика, Драма">
           <img src="https://avatars.mds.yandex.net/i?id=7b89c41a9787dd53b321ef23480dbd01f0f49410-4055578-images-thumbs&n=13" alt="Интерстеллар" class="movie-poster">
           <div>Название: <strong>Интерстеллар</strong></div>
@@ -58,7 +58,6 @@
           <div>Рейтинг: 8.6</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Гладиатор" data-genre="Исторический, Боевик">
           <img src=" https://avatars.mds.yandex.net/i?id=cacceac1f7d771402170682336af49a1db13bbf6-9265553-images-thumbs&n=13" alt="Гладиатор" class="movie-poster">
           <div>Название: <strong>Гладиатор</strong></div>
@@ -71,7 +70,6 @@
           <div>Рейтинг: 8.5</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Паразиты" data-genre="Триллер, Драма">
           <img src="https://avatars.mds.yandex.net/i?id=c7181285392869412cef879a816c2d31dc9e0020-6222399-images-thumbs&n=13" alt="Паразиты" class="movie-poster">
           <div>Название: <strong>Паразиты</strong></div>
@@ -84,7 +82,6 @@
           <div>Рейтинг: 8.6</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Матрица" data-genre="Фантастика, Боевик">
           <img src="https://avatars.mds.yandex.net/i?id=7a317aa746025d041c36709220a5dac1a1365b144b215b21-12385820-images-thumbs&n=13" alt="Матрица" class="movie-poster">
           <div>Название: <strong>Матрица</strong></div>
@@ -97,7 +94,6 @@
           <div>Рейтинг: 8.7</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Титаник" data-genre="Драма, Романтика">
           <img src="https://avatars.mds.yandex.net/i?id=f649fee992884f3502da91092b483d6a5fb9b3c9-4884717-images-thumbs&n=13" alt="Титаник" class="movie-poster">
           <div>Название: <strong>Титаник</strong></div>
@@ -110,7 +106,6 @@
           <div>Рейтинг: 7.8</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Форрест Гамп" data-genre="Драма, Комедия">
           <img src=" https://avatars.mds.yandex.net/i?id=4ce6d7598751976398c8f3319052711d73c6ea10-5884527-images-thumbs&n=13" alt="Форрест Гамп" class="movie-poster">
           <div>Название: <strong>Форрест Гамп</strong></div>
@@ -123,7 +118,6 @@
           <div>Рейтинг: 8.8</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Темный рыцарь" data-genre="Боевик, Криминал">
           <img src=" https://avatars.mds.yandex.net/i?id=fa3f011ab5e221bc03c4b5a06a9c7467d8a571eb-4820616-images-thumbs&n=13" alt="Темный рыцарь" class="movie-poster">
           <div>Название: <strong>Темный рыцарь</strong></div>
@@ -136,7 +130,6 @@
           <div>Рейтинг: 9.0</div>
           <div><button class="fav-btn">Добавить в избранное</button></div>
         </li>
-
         <li data-title="Властелин колец: Братство кольца" data-genre="Фэнтези, Приключения">
           <img src="https://avatars.mds.yandex.net/i?id=199ba5f2210fa90d267500f4b193e6b5747dd1b5-5291569-images-thumbs&n=13" alt="Властелин колец: Братство кольца" class="movie-poster">
           <div>Название: <strong>Властелин колец: Братство кольца</strong></div>
@@ -164,5 +157,36 @@
     <hr>
     <p>&copy; 2025 Каталог фильмов</p>
   </footer>
+
+  <script>
+    // Добавление/удаление из избранного
+    $(document).on('click', '.fav-btn', function() {
+      const $btn = $(this);
+      if ($btn.text() === 'Добавить в избранное') {
+        $btn.text('В избранном');
+      } else {
+        $btn.text('Добавить в избранное');
+      }
+    });
+
+    // Фильтрация по названию и жанру
+    function filterMovies() {
+      const title = $('#search-title').val().toLowerCase();
+      const genre = $('#search-genre').val().toLowerCase();
+      $('#movie-list li').each(function() {
+        const filmTitle = $(this).attr('data-title').toLowerCase();
+        const filmGenre = $(this).attr('data-genre').toLowerCase();
+        const matchTitle = filmTitle.includes(title);
+        const matchGenre = filmGenre.includes(genre);
+        if (matchTitle && matchGenre) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    }
+
+    $('#search-title, #search-genre').on('input', filterMovies);
+  </script>
 </body>
 </html>
