@@ -13,7 +13,8 @@
     <h1>Каталог фильмов</h1>
     <nav>
       <a href="#movies">Фильмы</a> |
-      <a href="#about">О сайте</a>
+      <a href="#about">О сайте</a> |
+      <a href="#fav" id="show-fav-btn" style="cursor:pointer;">Избранное</a>
     </nav>
     <hr>
   </header>
@@ -33,7 +34,7 @@
 
     <section id="movies">
       <h2>Список фильмов</h2>
-      <ul id="movie-list">        
+      <ul id="movie-list">
         <li data-title="Начало" data-genre="Фантастика, Триллер">
           <img src="https://i.pinimg.com/originals/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg" alt="Начало" class="movie-poster">
           <div>Название: <strong>Начало</strong></div>
@@ -153,6 +154,15 @@
     </section>
   </main>
 
+  <!-- Модальное окно избранного -->
+  <div id="fav-modal" style="display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; padding:20px; border-radius:8px; min-width:300px; max-width:90vw; max-height:80vh; overflow-y:auto; position:relative;">
+      <span id="close-fav-modal" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:20px;font-weight:bold;color:#555;">&times;</span>
+      <h3>Избранные фильмы</h3>
+      <ul id="fav-list"></ul>
+    </div>
+  </div>
+
   <footer>
     <hr>
     <p>&copy; 2025 Каталог фильмов</p>
@@ -185,8 +195,39 @@
         }
       });
     }
-
     $('#search-title, #search-genre').on('input', filterMovies);
+
+    // Окно избранного
+    $('#show-fav-btn').click(function(e) {
+      e.preventDefault();
+      const $favList = $('#fav-list');
+      $favList.empty();
+      $('#movie-list .fav-btn').each(function() {
+        if ($(this).text() === 'В избранном') {
+          const $li = $(this).closest('li');
+          const title = $li.find('strong').text();
+          const year = $li.find('div').eq(1).text();
+          const img = $li.find('img').attr('src');
+          $favList.append(
+            `<li style="margin-bottom:10px;">
+              <img src="${img}" alt="" style="height:40px;vertical-align:middle;margin-right:10px;">
+              <span>${title} (${year.replace('Год: ', '')})</span>
+            </li>`
+          );
+        }
+      });
+      if ($favList.children().length === 0) {
+        $favList.append('<li>Нет избранных фильмов</li>');
+      }
+      $('#fav-modal').fadeIn(200);
+    });
+
+    // Закрыть окно избранного
+    $('#fav-modal, #close-fav-modal').click(function(e) {
+      if (e.target === this || e.target.id === 'close-fav-modal') {
+        $('#fav-modal').fadeOut(200);
+      }
+    });
   </script>
 </body>
 </html>
