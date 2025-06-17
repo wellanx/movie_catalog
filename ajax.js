@@ -154,3 +154,32 @@ $(document).ready(function() {
             addToFavorites(movieId);
         }
     });
+       // Обновление списка избранного в модальном окне
+    function updateFavoritesList() {
+        const $favList = $('#fav-list');
+        $favList.empty();
+        const favoritedMovies = movies.filter(movie => favorites.includes(movie.id));
+        if (favoritedMovies.length === 0) {
+            $favList.append('<li>Нет избранных фильмов</li>');
+        } else {
+            favoritedMovies.forEach(movie => {
+                $favList.append(`
+                    <li style="margin-bottom:10px;">
+                        <img src="${movie.poster}" alt="${movie.title}" style="height:40px;vertical-align:middle;margin-right:10px;">
+                        <span>${movie.title} (${movie.year})</span>
+                    </li>
+                `);
+            });
+        }
+    }
+
+    // Переопределение показа модального окна избранного
+    $('#show-fav-btn').click(function(e) {
+        e.preventDefault();
+        updateFavoritesList();
+        $('#fav-modal').fadeIn(200);
+    });
+
+    // Инициализация
+    loadMovies();
+});
