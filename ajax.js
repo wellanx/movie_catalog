@@ -119,3 +119,38 @@ $(document).ready(function() {
             $btn.text(isFavorited ? 'В избранном' : 'Добавить в избранное');
         }
     }
+    // Переопределение рендера фильмов для поддержки data-id
+    function renderMovies(moviesToRender) {
+        $('#movie-list').empty();
+        moviesToRender.forEach(movie => {
+            const isFavorited = favorites.includes(movie.id);
+            const movieHtml = `
+                <li data-title="${movie.title}" data-genre="${movie.genres.join(', ')}" data-id="${movie.id}">
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                    <div>Название: <strong>${movie.title}</strong></div>
+                    <div>Год: ${movie.year}</div>
+                    <div>Жанр: ${movie.genres.join(', ')}</div>
+                    <div>Описание: ${movie.description}</div>
+                    <div>Режиссёр: ${movie.director}</div>
+                    <div>Продолжительность: ${movie.duration} мин</div>
+                    <div>Страна: ${movie.country}</div>
+                    <div>Рейтинг: ${movie.rating}</div>
+                    <div><button class="fav-btn" data-id="${movie.id}">${isFavorited ? 'В избранном' : 'Добавить в избранное'}</button></div>
+                </li>
+            `;
+            $('#movie-list').append(movieHtml);
+        });
+        // Применить фильтры после рендера
+        filterMovies();
+    }
+
+    // Переопределение обработчика избранного
+    $(document).on('click', '.fav-btn', function() {
+        const movieId = parseInt($(this).data('id'));
+        const isFavorited = favorites.includes(movieId);
+        if (isFavorited) {
+            removeFromFavorites(movieId);
+        } else {
+            addToFavorites(movieId);
+        }
+    });
