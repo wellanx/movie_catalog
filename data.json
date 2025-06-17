@@ -1,0 +1,113 @@
+{
+    "movies": [
+      {
+        "id": 1,
+        "title": "Начало",
+        "year": 2010,
+        "genres": ["Фантастика", "Триллер"],
+        "poster": "https://i.pinimg.com/originals/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg",
+        "description": "Вор, способный проникать в сны, получает задание внедрить идею в подсознание.",
+        "director": "Кристофер Нолан",
+        "duration": 148,
+        "country": "США",
+        "rating": 8.8
+      },
+      {
+        "id": 2,
+        "title": "Интерстеллар",
+        "year": 2014,
+        "genres": ["Фантастика", "Драма"],
+        "poster": "https://avatars.mds.yandex.net/i?id=7b89c41a9787dd53b321ef23480dbd01f0f49410-4055578-images-thumbs&n=13",
+        "description": "Группа исследователей путешествует через червоточину в поисках нового дома для человечества.",
+        "director": "Кристофер Нолан",
+        "duration": 169,
+        "country": "США",
+        "rating": 8.6
+      },
+      {
+        "id": 3,
+        "title": "Гладиатор",
+        "year": 2000,
+        "genres": ["Исторический", "Боевик"],
+        "poster": "https://avatars.mds.yandex.net/i?id=cacceac1f7d771402170682336af49a1db13bbf6-9265553-images-thumbs&n=13",
+        "description": "Генерал Максимус становится гладиатором, чтобы отомстить императору.",
+        "director": "Ридли Скотт",
+        "duration": 155,
+        "country": "США",
+        "rating": 8.5
+      },
+      {
+        "id": 4,
+        "title": "Паразиты",
+        "year": 2019,
+        "genres": ["Триллер", "Драма"],
+        "poster": "https://avatars.mds.yandex.net/i?id=c7181285392869412cef879a816c2d31dc9e0020-6222399-images-thumbs&n=13",
+        "description": "Семья бедняков внедряется в дом богатых людей, что приводит к неожиданным последствиям.",
+        "director": "Пон Джун Хо",
+        "duration": 132,
+        "country": "Южная Корея",
+        "rating": 8.6
+      },
+      {
+        "id": 5,
+        "title": "Матрица",
+        "year": 1999,
+        "genres": ["Фантастика", "Боевик"],
+        "poster": "https://avatars.mds.yandex.net/i?id=7a317aa746025d041c36709220a5dac1a1365b144b215b21-12385820-images-thumbs&n=13",
+        "description": "Программист узнаёт, что его мир — это компьютерная симуляция.",
+        "director": "Лана и Лилли Вачовски",
+        "duration": 136,
+        "country": "США",
+        "rating": 8.7
+      },
+      {
+        "id": 6,
+        "title": "Титаник",
+        "year": 1997,
+        "genres": ["Драма", "Романтика"],
+        "poster": "https://avatars.mds.yandex.net/i?id=f649fee992884f3502da91092b483d6a5fb9b3c9-4884717-images-thumbs&n=13",
+        "description": "История любви на фоне трагедии затонувшего лайнера.",
+        "director": "Джеймс Кэмерон",
+        "duration": 195,
+        "country": "США",
+        "rating": 7.8
+      },
+      {
+        "id": 7,
+        "title": "Форрест Гамп",
+        "year": 1994,
+        "genres": ["Драма", "Комедия"],
+        "poster": "https://avatars.mds.yandex.net/i?id=4ce6d7598751976398c8f3319052711d73c6ea10-5884527-images-thumbs&n=13",
+        "description": "История жизни простодушного Форреста, который стал свидетелем важных событий XX века.",
+        "director": "Роберт Земекис",
+        "duration": 142,
+        "country": "США",
+        "rating": 8.8
+      },
+      {
+        "id": 8,
+        "title": "Темный рыцарь",
+        "year": 2008,
+        "genres": ["Боевик", "Криминал"],
+        "poster": "https://avatars.mds.yandex.net/i?id=fa3f011ab5e221bc03c4b5a06a9c7467d8a571eb-4820616-images-thumbs&n=13",
+        "description": "Бэтмен сталкивается с анархистом Джокером, который сеет хаос в Готэме.",
+        "director": "Кристофер Нолан",
+        "duration": 152,
+        "country": "США",
+        "rating": 9.0
+      },
+      {
+        "id": 9,
+        "title": "Властелин колец: Братство кольца",
+        "year": 2001,
+        "genres": ["Фэнтези", "Приключения"],
+        "poster": "https://avatars.mds.yandex.net/i?id=199ba5f2210fa90d267500f4b193e6b5747dd1b5-5291569-images-thumbs&n=13",
+        "description": "Начало эпического путешествия хоббита Фродо и его друзей.",
+        "director": "Питер Джексон",
+        "duration": 178,
+        "country": "Новая Зеландия",
+        "rating": 8.8
+      }
+    ],
+    "favorites": []
+  }
