@@ -5,8 +5,6 @@ $(document).ready(function() {
     // Функция для загрузки фильмов (GET-запрос)
     function loadMovies() {
         $.ajax({
-            // Было: url: 'http://localhost:3000/books'
-            // Стало:
             url: '/api/movies',
             method: 'GET',
             dataType: 'json',
@@ -44,7 +42,7 @@ $(document).ready(function() {
      // Функция для добавления в избранное (POST-запрос)
     function addToFavorites(movieId) {
         $.ajax({
-            url: 'http://localhost:3000/favorites',
+            url: '/api/favorites',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ movieId }),
@@ -81,22 +79,23 @@ $(document).ready(function() {
    // Функция для удаления из избранного (DELETE-запрос)
     function removeFromFavorites(movieId) {
         $.ajax({
-            url: `http://localhost:3000/favorites/${movieId}`,
-            method: 'DELETE',
-            success: function() {
-                favorites = favorites.filter(id => id !== movieId);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                updateFavoriteButton(movieId, false);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
-                // Fallback на localStorage
-                favorites = favorites.filter(id => id !== movieId);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                updateFavoriteButton(movieId, false);
-                alert('Фильм удален локально из-за ошибки сервера.');
-            }
+        url: `/api/favorites/${movieId}`, // Исправлено
+        method: 'DELETE',
+        success: function() {
+            favorites = favorites.filter(id => id !== movieId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoriteButton(movieId, false);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
+            // Fallback на localStorage
+            favorites = favorites.filter(id => id !== movieId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoriteButton(movieId, false);
+            alert('Фильм удален локально из-за ошибки сервера.');
+        }
         });
+    }
 
         // Имитация через setTimeout
         /*
