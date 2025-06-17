@@ -1,234 +1,341 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="style.css">
-  <title>Каталог фильмов</title>
-  <!-- Подключаем jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Каталог фильмов</title>
+    <!-- Подключаем jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Каталог фильмов</h1>
+      <nav>
+        <a href="#movies">Фильмы</a> | <a href="#about">О сайте</a> |
+        <a href="#fav" id="show-fav-btn" style="cursor: pointer">Избранное</a>
+      </nav>
+      <hr />
+    </header>
 
-  <header>
-    <h1>Каталог фильмов</h1>
-    <nav>
-      <a href="#movies">Фильмы</a> |
-      <a href="#about">О сайте</a> |
-      <a href="#fav" id="show-fav-btn" style="cursor:pointer;">Избранное</a>
-    </nav>
-    <hr>
-  </header>
+    <main>
+      <section id="filters">
+        <h2>Поиск и фильтры</h2>
+        <label>
+          Поиск по названию:
+          <input
+            type="text"
+            id="search-title"
+            placeholder="Введите название"
+          /> </label
+        ><br /><br />
+        <label>
+          Фильтр по жанру:
+          <input type="text" id="search-genre" placeholder="Введите жанр" />
+        </label>
+      </section>
 
-  <main>
-    <section id="filters">
-      <h2>Поиск и фильтры</h2>
-      <label>
-        Поиск по названию: 
-        <input type="text" id="search-title" placeholder="Введите название">
-      </label><br><br>
-      <label>
-        Фильтр по жанру: 
-        <input type="text" id="search-genre" placeholder="Введите жанр">
-      </label>
-    </section>
+      <section id="movies">
+        <h2>Список фильмов</h2>
+        <ul id="movie-list">
+          <li data-title="Начало" data-genre="Фантастика, Триллер">
+            <img
+              src="https://i.pinimg.com/originals/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg"
+              alt="Начало"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Начало</strong></div>
+            <div>Год: 2010</div>
+            <div>Жанр: Фантастика, Триллер</div>
+            <div>
+              Описание: Вор, способный проникать в сны, получает задание
+              внедрить идею в подсознание.
+            </div>
+            <div>Режиссёр: Кристофер Нолан</div>
+            <div>Продолжительность: 148 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 8.8</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Интерстеллар" data-genre="Фантастика, Драма">
+            <img
+              src="https://avatars.mds.yandex.net/i?id=7b89c41a9787dd53b321ef23480dbd01f0f49410-4055578-images-thumbs&n=13"
+              alt="Интерстеллар"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Интерстеллар</strong></div>
+            <div>Год: 2014</div>
+            <div>Жанр: Фантастика, Драма</div>
+            <div>
+              Описание: Группа исследователей путешествует через червоточину в
+              поисках нового дома для человечества.
+            </div>
+            <div>Режиссёр: Кристофер Нолан</div>
+            <div>Продолжительность: 169 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 8.6</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Гладиатор" data-genre="Исторический, Боевик">
+            <img
+              src=" https://avatars.mds.yandex.net/i?id=cacceac1f7d771402170682336af49a1db13bbf6-9265553-images-thumbs&n=13"
+              alt="Гладиатор"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Гладиатор</strong></div>
+            <div>Год: 2000</div>
+            <div>Жанр: Исторический, Боевик</div>
+            <div>
+              Описание: Генерал Максимус становится гладиатором, чтобы отомстить
+              императору.
+            </div>
+            <div>Режиссёр: Ридли Скотт</div>
+            <div>Продолжительность: 155 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 8.5</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Паразиты" data-genre="Триллер, Драма">
+            <img
+              src="https://avatars.mds.yandex.net/i?id=c7181285392869412cef879a816c2d31dc9e0020-6222399-images-thumbs&n=13"
+              alt="Паразиты"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Паразиты</strong></div>
+            <div>Год: 2019</div>
+            <div>Жанр: Триллер, Драма</div>
+            <div>
+              Описание: Семья бедняков внедряется в дом богатых людей, что
+              приводит к неожиданным последствиям.
+            </div>
+            <div>Режиссёр: Пон Джун Хо</div>
+            <div>Продолжительность: 132 мин</div>
+            <div>Страна: Южная Корея</div>
+            <div>Рейтинг: 8.6</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Матрица" data-genre="Фантастика, Боевик">
+            <img
+              src="https://avatars.mds.yandex.net/i?id=7a317aa746025d041c36709220a5dac1a1365b144b215b21-12385820-images-thumbs&n=13"
+              alt="Матрица"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Матрица</strong></div>
+            <div>Год: 1999</div>
+            <div>Жанр: Фантастика, Боевик</div>
+            <div>
+              Описание: Программист узнаёт, что его мир — это компьютерная
+              симуляция.
+            </div>
+            <div>Режиссёр: Лана и Лилли Вачовски</div>
+            <div>Продолжительность: 136 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 8.7</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Титаник" data-genre="Драма, Романтика">
+            <img
+              src="https://avatars.mds.yandex.net/i?id=f649fee992884f3502da91092b483d6a5fb9b3c9-4884717-images-thumbs&n=13"
+              alt="Титаник"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Титаник</strong></div>
+            <div>Год: 1997</div>
+            <div>Жанр: Драма, Романтика</div>
+            <div>
+              Описание: История любви на фоне трагедии затонувшего лайнера.
+            </div>
+            <div>Режиссёр: Джеймс Кэмерон</div>
+            <div>Продолжительность: 195 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 7.8</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Форрест Гамп" data-genre="Драма, Комедия">
+            <img
+              src=" https://avatars.mds.yandex.net/i?id=4ce6d7598751976398c8f3319052711d73c6ea10-5884527-images-thumbs&n=13"
+              alt="Форрест Гамп"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Форрест Гамп</strong></div>
+            <div>Год: 1994</div>
+            <div>Жанр: Драма, Комедия</div>
+            <div>
+              Описание: История жизни простодушного Форреста, который стал
+              свидетелем важных событий XX века.
+            </div>
+            <div>Режиссёр: Роберт Земекис</div>
+            <div>Продолжительность: 142 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 8.8</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li data-title="Темный рыцарь" data-genre="Боевик, Криминал">
+            <img
+              src=" https://avatars.mds.yandex.net/i?id=fa3f011ab5e221bc03c4b5a06a9c7467d8a571eb-4820616-images-thumbs&n=13"
+              alt="Темный рыцарь"
+              class="movie-poster"
+            />
+            <div>Название: <strong>Темный рыцарь</strong></div>
+            <div>Год: 2008</div>
+            <div>Жанр: Боевик, Криминал</div>
+            <div>
+              Описание: Бэтмен сталкивается с анархистом Джокером, который сеет
+              хаос в Готэме.
+            </div>
+            <div>Режиссёр: Кристофер Нолан</div>
+            <div>Продолжительность: 152 мин</div>
+            <div>Страна: США</div>
+            <div>Рейтинг: 9.0</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+          <li
+            data-title="Властелин колец: Братство кольца"
+            data-genre="Фэнтези, Приключения"
+          >
+            <img
+              src="https://avatars.mds.yandex.net/i?id=199ba5f2210fa90d267500f4b193e6b5747dd1b5-5291569-images-thumbs&n=13"
+              alt="Властелин колец: Братство кольца"
+              class="movie-poster"
+            />
+            <div>
+              Название: <strong>Властелин колец: Братство кольца</strong>
+            </div>
+            <div>Год: 2001</div>
+            <div>Жанр: Фэнтези, Приключения</div>
+            <div>
+              Описание: Начало эпического путешествия хоббита Фродо и его
+              друзей.
+            </div>
+            <div>Режиссёр: Питер Джексон</div>
+            <div>Продолжительность: 178 мин</div>
+            <div>Страна: Новая Зеландия</div>
+            <div>Рейтинг: 8.8</div>
+            <div><button class="fav-btn">Добавить в избранное</button></div>
+          </li>
+        </ul>
+      </section>
 
-    <section id="movies">
-      <h2>Список фильмов</h2>
-      <ul id="movie-list">
-        <li data-title="Начало" data-genre="Фантастика, Триллер">
-          <img src="https://i.pinimg.com/originals/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg" alt="Начало" class="movie-poster">
-          <div>Название: <strong>Начало</strong></div>
-          <div>Год: 2010</div>
-          <div>Жанр: Фантастика, Триллер</div>
-          <div>Описание: Вор, способный проникать в сны, получает задание внедрить идею в подсознание.</div>
-          <div>Режиссёр: Кристофер Нолан</div>
-          <div>Продолжительность: 148 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 8.8</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Интерстеллар" data-genre="Фантастика, Драма">
-          <img src="https://avatars.mds.yandex.net/i?id=7b89c41a9787dd53b321ef23480dbd01f0f49410-4055578-images-thumbs&n=13" alt="Интерстеллар" class="movie-poster">
-          <div>Название: <strong>Интерстеллар</strong></div>
-          <div>Год: 2014</div>
-          <div>Жанр: Фантастика, Драма</div>
-          <div>Описание: Группа исследователей путешествует через червоточину в поисках нового дома для человечества.</div>
-          <div>Режиссёр: Кристофер Нолан</div>
-          <div>Продолжительность: 169 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 8.6</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Гладиатор" data-genre="Исторический, Боевик">
-          <img src=" https://avatars.mds.yandex.net/i?id=cacceac1f7d771402170682336af49a1db13bbf6-9265553-images-thumbs&n=13" alt="Гладиатор" class="movie-poster">
-          <div>Название: <strong>Гладиатор</strong></div>
-          <div>Год: 2000</div>
-          <div>Жанр: Исторический, Боевик</div>
-          <div>Описание: Генерал Максимус становится гладиатором, чтобы отомстить императору.</div>
-          <div>Режиссёр: Ридли Скотт</div>
-          <div>Продолжительность: 155 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 8.5</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Паразиты" data-genre="Триллер, Драма">
-          <img src="https://avatars.mds.yandex.net/i?id=c7181285392869412cef879a816c2d31dc9e0020-6222399-images-thumbs&n=13" alt="Паразиты" class="movie-poster">
-          <div>Название: <strong>Паразиты</strong></div>
-          <div>Год: 2019</div>
-          <div>Жанр: Триллер, Драма</div>
-          <div>Описание: Семья бедняков внедряется в дом богатых людей, что приводит к неожиданным последствиям.</div>
-          <div>Режиссёр: Пон Джун Хо</div>
-          <div>Продолжительность: 132 мин</div>
-          <div>Страна: Южная Корея</div>
-          <div>Рейтинг: 8.6</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Матрица" data-genre="Фантастика, Боевик">
-          <img src="https://avatars.mds.yandex.net/i?id=7a317aa746025d041c36709220a5dac1a1365b144b215b21-12385820-images-thumbs&n=13" alt="Матрица" class="movie-poster">
-          <div>Название: <strong>Матрица</strong></div>
-          <div>Год: 1999</div>
-          <div>Жанр: Фантастика, Боевик</div>
-          <div>Описание: Программист узнаёт, что его мир — это компьютерная симуляция.</div>
-          <div>Режиссёр: Лана и Лилли Вачовски</div>
-          <div>Продолжительность: 136 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 8.7</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Титаник" data-genre="Драма, Романтика">
-          <img src="https://avatars.mds.yandex.net/i?id=f649fee992884f3502da91092b483d6a5fb9b3c9-4884717-images-thumbs&n=13" alt="Титаник" class="movie-poster">
-          <div>Название: <strong>Титаник</strong></div>
-          <div>Год: 1997</div>
-          <div>Жанр: Драма, Романтика</div>
-          <div>Описание: История любви на фоне трагедии затонувшего лайнера.</div>
-          <div>Режиссёр: Джеймс Кэмерон</div>
-          <div>Продолжительность: 195 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 7.8</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Форрест Гамп" data-genre="Драма, Комедия">
-          <img src=" https://avatars.mds.yandex.net/i?id=4ce6d7598751976398c8f3319052711d73c6ea10-5884527-images-thumbs&n=13" alt="Форрест Гамп" class="movie-poster">
-          <div>Название: <strong>Форрест Гамп</strong></div>
-          <div>Год: 1994</div>
-          <div>Жанр: Драма, Комедия</div>
-          <div>Описание: История жизни простодушного Форреста, который стал свидетелем важных событий XX века.</div>
-          <div>Режиссёр: Роберт Земекис</div>
-          <div>Продолжительность: 142 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 8.8</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Темный рыцарь" data-genre="Боевик, Криминал">
-          <img src=" https://avatars.mds.yandex.net/i?id=fa3f011ab5e221bc03c4b5a06a9c7467d8a571eb-4820616-images-thumbs&n=13" alt="Темный рыцарь" class="movie-poster">
-          <div>Название: <strong>Темный рыцарь</strong></div>
-          <div>Год: 2008</div>
-          <div>Жанр: Боевик, Криминал</div>
-          <div>Описание: Бэтмен сталкивается с анархистом Джокером, который сеет хаос в Готэме.</div>
-          <div>Режиссёр: Кристофер Нолан</div>
-          <div>Продолжительность: 152 мин</div>
-          <div>Страна: США</div>
-          <div>Рейтинг: 9.0</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-        <li data-title="Властелин колец: Братство кольца" data-genre="Фэнтези, Приключения">
-          <img src="https://avatars.mds.yandex.net/i?id=199ba5f2210fa90d267500f4b193e6b5747dd1b5-5291569-images-thumbs&n=13" alt="Властелин колец: Братство кольца" class="movie-poster">
-          <div>Название: <strong>Властелин колец: Братство кольца</strong></div>
-          <div>Год: 2001</div>
-          <div>Жанр: Фэнтези, Приключения</div>
-          <div>Описание: Начало эпического путешествия хоббита Фродо и его друзей.</div>
-          <div>Режиссёр: Питер Джексон</div>
-          <div>Продолжительность: 178 мин</div>
-          <div>Страна: Новая Зеландия</div>
-          <div>Рейтинг: 8.8</div>
-          <div><button class="fav-btn">Добавить в избранное</button></div>
-        </li>
-      </ul>
-    </section>
+      <section id="about">
+        <h2>О сайте</h2>
+        <p>
+          Это каталог фильмов. Здесь вы можете просматривать список фильмов,
+          добавлять их в избранное и фильтровать по названию и жанру.
+        </p>
+      </section>
+    </main>
 
-    <section id="about">
-      <h2>О сайте</h2>
-      <p>
-        Это каталог фильмов. Здесь вы можете просматривать список фильмов, добавлять их в избранное и фильтровать по названию и жанру.
-      </p>
-    </section>
-  </main>
-
-  <!-- Модальное окно избранного -->
-  <div id="fav-modal" style="display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-    <div style="background:#fff; padding:20px; border-radius:8px; min-width:300px; max-width:90vw; max-height:80vh; overflow-y:auto; position:relative;">
-      <span id="close-fav-modal" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:20px;font-weight:bold;color:#555;">&times;</span>
-      <h3>Избранные фильмы</h3>
-      <ul id="fav-list"></ul>
+    <!-- Модальное окно избранного -->
+    <div
+      id="fav-modal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          min-width: 300px;
+          max-width: 90vw;
+          max-height: 80vh;
+          overflow-y: auto;
+          position: relative;
+        "
+      >
+        <span
+          id="close-fav-modal"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+          "
+          >&times;</span
+        >
+        <h3>Избранные фильмы</h3>
+        <ul id="fav-list"></ul>
+      </div>
     </div>
-  </div>
 
-  <footer>
-    <hr>
-    <p>&copy; 2025 Каталог фильмов</p>
-  </footer>
+    <footer>
+      <hr />
+      <p>&copy; 2025 Каталог фильмов</p>
+    </footer>
 
-  <script>
-    // Добавление/удаление из избранного
-    $(document).on('click', '.fav-btn', function() {
-      const $btn = $(this);
-      if ($btn.text() === 'Добавить в избранное') {
-        $btn.text('В избранном');
-      } else {
-        $btn.text('Добавить в избранное');
-      }
-    });
-
-    // Фильтрация по названию и жанру
-    function filterMovies() {
-      const title = $('#search-title').val().toLowerCase();
-      const genre = $('#search-genre').val().toLowerCase();
-      $('#movie-list li').each(function() {
-        const filmTitle = $(this).attr('data-title').toLowerCase();
-        const filmGenre = $(this).attr('data-genre').toLowerCase();
-        const matchTitle = filmTitle.includes(title);
-        const matchGenre = filmGenre.includes(genre);
-        if (matchTitle && matchGenre) {
-          $(this).show();
+    <script>
+      // Добавление/удаление из избранного
+      $(document).on("click", ".fav-btn", function () {
+        const $btn = $(this);
+        if ($btn.text() === "Добавить в избранное") {
+          $btn.text("В избранном");
         } else {
-          $(this).hide();
+          $btn.text("Добавить в избранное");
         }
       });
-    }
-    $('#search-title, #search-genre').on('input', filterMovies);
 
-    // Окно избранного
-    $('#show-fav-btn').click(function(e) {
-      e.preventDefault();
-      const $favList = $('#fav-list');
-      $favList.empty();
-      $('#movie-list .fav-btn').each(function() {
-        if ($(this).text() === 'В избранном') {
-          const $li = $(this).closest('li');
-          const title = $li.find('strong').text();
-          const year = $li.find('div').eq(1).text();
-          const img = $li.find('img').attr('src');
-          $favList.append(
-            `<li style="margin-bottom:10px;">
+      // Фильтрация по названию и жанру
+      function filterMovies() {
+        const title = $("#search-title").val().toLowerCase();
+        const genre = $("#search-genre").val().toLowerCase();
+        $("#movie-list li").each(function () {
+          const filmTitle = $(this).attr("data-title").toLowerCase();
+          const filmGenre = $(this).attr("data-genre").toLowerCase();
+          const matchTitle = filmTitle.includes(title);
+          const matchGenre = filmGenre.includes(genre);
+          if (matchTitle && matchGenre) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+      $("#search-title, #search-genre").on("input", filterMovies);
+
+      // Окно избранного
+      $("#show-fav-btn").click(function (e) {
+        e.preventDefault();
+        const $favList = $("#fav-list");
+        $favList.empty();
+        $("#movie-list .fav-btn").each(function () {
+          if ($(this).text() === "В избранном") {
+            const $li = $(this).closest("li");
+            const title = $li.find("strong").text();
+            const year = $li.find("div").eq(1).text();
+            const img = $li.find("img").attr("src");
+            $favList.append(
+              `<li style="margin-bottom:10px;">
               <img src="${img}" alt="" style="height:40px;vertical-align:middle;margin-right:10px;">
-              <span>${title} (${year.replace('Год: ', '')})</span>
+              <span>${title} (${year.replace("Год: ", "")})</span>
             </li>`
-          );
+            );
+          }
+        });
+        if ($favList.children().length === 0) {
+          $favList.append("<li>Нет избранных фильмов</li>");
+        }
+        $("#fav-modal").fadeIn(200);
+      });
+
+      // Закрыть окно избранного
+      $("#fav-modal, #close-fav-modal").click(function (e) {
+        if (e.target === this || e.target.id === "close-fav-modal") {
+          $("#fav-modal").fadeOut(200);
         }
       });
-      if ($favList.children().length === 0) {
-        $favList.append('<li>Нет избранных фильмов</li>');
-      }
-      $('#fav-modal').fadeIn(200);
-    });
-
-    // Закрыть окно избранного
-    $('#fav-modal, #close-fav-modal').click(function(e) {
-      if (e.target === this || e.target.id === 'close-fav-modal') {
-        $('#fav-modal').fadeOut(200);
-      }
-    });
-  </script>
-  <script src="ajax.js"></script>
-</body>
+    </script>
+    <script src="js/ajax.js"></script>
+  </body>
 </html>

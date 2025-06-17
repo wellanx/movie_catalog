@@ -5,7 +5,9 @@ $(document).ready(function() {
     // Функция для загрузки фильмов (GET-запрос)
     function loadMovies() {
         $.ajax({
-            url: 'http://localhost:3000/books', // Замените на ваш API или 'my-movie/movies.json'
+            // Было: url: 'http://localhost:3000/books'
+            // Стало:
+            url: '/api/movies',
             method: 'GET',
             dataType: 'json',
             success: function(data) {
