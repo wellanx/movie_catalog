@@ -76,3 +76,46 @@ $(document).ready(function() {
         }, 500);
         */
     }
+   // Функция для удаления из избранного (DELETE-запрос)
+    function removeFromFavorites(movieId) {
+        $.ajax({
+            url: `http://localhost:3000/favorites/${movieId}`,
+            method: 'DELETE',
+            success: function() {
+                favorites = favorites.filter(id => id !== movieId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButton(movieId, false);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
+                // Fallback на localStorage
+                favorites = favorites.filter(id => id !== movieId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButton(movieId, false);
+                alert('Фильм удален локально из-за ошибки сервера.');
+            }
+        });
+
+        // Имитация через setTimeout
+        /*
+        setTimeout(() => {
+            favorites = favorites.filter(id => id !== movieId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavoriteButton(movieId, false);
+        }, 500);
+        */
+    }
+
+    // Обновление кнопки избранного
+    function updateFavoriteButton(movieId, isFavorited) {
+        const $btn = $(`.fav-btn[data-id="${movieId}"]`);
+        if ($btn.length === 0) {
+            // Если кнопка не найдена, найти по ближайшему li
+            const $li = $(`#movie-list li[data-id="${movieId}"]`);
+            const $newBtn = $li.find('.fav-btn');
+            $newBtn.text(isFavorited ? 'В избранном' : 'Добавить в избранное');
+            $newBtn.data('id', movieId);
+        } else {
+            $btn.text(isFavorited ? 'В избранном' : 'Добавить в избранное');
+        }
+    }
