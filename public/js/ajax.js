@@ -4,27 +4,30 @@ $(document).ready(function() {
 
     // Функция для загрузки фильмов (GET-запрос)
     function loadMovies() {
+        const title = $('#title-filter').val();
+        const genre = $('#genre-filter').val();
         $.ajax({
-            url: '/api/movies',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                movies = data;
-                localStorage.setItem('movies', JSON.stringify(movies));
-                renderMovies(movies); // Вызов существующей функции рендера
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Ошибка загрузки фильмов:', textStatus, errorThrown);
-                // Fallback на localStorage
-                const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
-                if (storedMovies.length > 0) {
-                    movies = storedMovies;
-                    renderMovies(movies);
-                } else {
-                    alert('Ошибка загрузки фильмов! Проверьте подключение к API.');
-                }
+          url: '/api/movies',
+          method: 'GET',
+          data: { title, genre }, // Передаём параметры фильтрации
+          dataType: 'json',
+          success: function(data) {
+            movies = data;
+            localStorage.setItem('movies', JSON.stringify(movies));
+            renderMovies(movies);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Ошибка загрузки фильмов:', textStatus, errorThrown);
+            const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
+            if (storedMovies.length > 0) {
+              movies = storedMovies;
+              renderMovies(movies);
+            } else {
+              alert('Ошибка загрузки фильмов! Проверьте подключение к API.');
             }
+          }
         });
+      }
 
         // Имитация через setTimeout (для тестирования без API)
         /*
@@ -39,7 +42,8 @@ $(document).ready(function() {
         }, 500);
         */
     }
-     // Функция для добавления в избранное (POST-запрос)
+
+    // Функция для добавления в избранное (POST-запрос)
     function addToFavorites(movieId) {
         $.ajax({
             url: '/api/favorites',
@@ -76,26 +80,26 @@ $(document).ready(function() {
         }, 500);
         */
     }
-   // Функция для удаления из избранного (DELETE-запрос)
+
+    // Функция для удаления из избранного (DELETE-запрос)
     function removeFromFavorites(movieId) {
         $.ajax({
-        url: `/api/favorites/${movieId}`, // Исправлено
-        method: 'DELETE',
-        success: function() {
-            favorites = favorites.filter(id => id !== movieId);
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            updateFavoriteButton(movieId, false);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
-            // Fallback на localStorage
-            favorites = favorites.filter(id => id !== movieId);
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            updateFavoriteButton(movieId, false);
-            alert('Фильм удален локально из-за ошибки сервера.');
-        }
+            url: `/api/favorites/${movieId}`, // Исправлено
+            method: 'DELETE',
+            success: function() {
+                favorites = favorites.filter(id => id !== movieId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButton(movieId, false);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
+                // Fallback на localStorage
+                favorites = favorites.filter(id => id !== movieId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButton(movieId, false);
+                alert('Фильм удален локально из-за ошибки сервера.');
+            }
         });
-    }
 
         // Имитация через setTimeout
         /*
@@ -120,6 +124,7 @@ $(document).ready(function() {
             $btn.text(isFavorited ? 'В избранном' : 'Добавить в избранное');
         }
     }
+
     // Переопределение рендера фильмов для поддержки data-id
     function renderMovies(moviesToRender) {
         $('#movie-list').empty();
@@ -155,7 +160,8 @@ $(document).ready(function() {
             addToFavorites(movieId);
         }
     });
-       // Обновление списка избранного в модальном окне
+
+    // Обновление списка избранного в модальном окне
     function updateFavoritesList() {
         const $favList = $('#fav-list');
         $favList.empty();
