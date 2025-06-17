@@ -7,46 +7,34 @@ $(document).ready(function() {
         const title = $('#title-filter').val();
         const genre = $('#genre-filter').val();
         $.ajax({
-          url: '/api/movies',
-          method: 'GET',
-          data: { title, genre }, // Передаём параметры фильтрации
-          dataType: 'json',
-          success: function(data) {
-            movies = data;
-            localStorage.setItem('movies', JSON.stringify(movies));
-            renderMovies(movies);
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Ошибка загрузки фильмов:', textStatus, errorThrown);
-            const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
-            if (storedMovies.length > 0) {
-              movies = storedMovies;
-              renderMovies(movies);
-            } else {
-              alert('Ошибка загрузки фильмов! Проверьте подключение к API.');
-            }
-          }
-        });
-      }
-
-      $('#title-filter, #genre-filter').on('input change', function() {
-        loadMovies(); // Перезагружаем фильмы при изменении фильтров
-      });
-        // Имитация через setTimeout (для тестирования без API)
-        /*
-        setTimeout(() => {
-            const mockMovies = JSON.parse(localStorage.getItem('movies') || '[]');
-            if (mockMovies.length > 0) {
-                movies = mockMovies;
+            url: '/api/movies',
+            method: 'GET',
+            data: { title, genre },
+            dataType: 'json',
+            success: function(data) {
+                movies = data;
+                localStorage.setItem('movies', JSON.stringify(movies));
                 renderMovies(movies);
-            } else {
-                alert('Нет данных для загрузки!');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка загрузки фильмов:', textStatus, errorThrown);
+                const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
+                if (storedMovies.length > 0) {
+                    movies = storedMovies;
+                    renderMovies(movies);
+                } else {
+                    alert('Ошибка загрузки фильмов! Проверьте подключение к API.');
+                }
             }
-        }, 500);
-        */
+        });
     }
 
-    // Функция для добавления в избранное (POST-запрос)
+    // Фильтрация при вводе
+    $('#title-filter, #genre-filter').on('input change', function() {
+        loadMovies();
+    });
+
+    // Функция добавления в избранное (POST-запрос)
     function addToFavorites(movieId) {
         $.ajax({
             url: '/api/favorites',
@@ -62,7 +50,6 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Ошибка добавления в избранное:', textStatus, errorThrown);
-                // Fallback на localStorage
                 if (!favorites.includes(movieId)) {
                     favorites.push(movieId);
                     localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -71,23 +58,12 @@ $(document).ready(function() {
                 alert('Фильм добавлен локально из-за ошибки сервера.');
             }
         });
-
-        // Имитация через setTimeout
-        /*
-        setTimeout(() => {
-            if (!favorites.includes(movieId)) {
-                favorites.push(movieId);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                updateFavoriteButton(movieId, true);
-            }
-        }, 500);
-        */
     }
 
-    // Функция для удаления из избранного (DELETE-запрос)
+    // Функция удаления из избранного (DELETE-запрос)
     function removeFromFavorites(movieId) {
         $.ajax({
-            url: `/api/favorites/${movieId}`, // Исправлено
+            url: `/api/favorites/${movieId}`,
             method: 'DELETE',
             success: function() {
                 favorites = favorites.filter(id => id !== movieId);
@@ -96,29 +72,18 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Ошибка удаления из избранного:', textStatus, errorThrown);
-                // Fallback на localStorage
                 favorites = favorites.filter(id => id !== movieId);
                 localStorage.setItem('favorites', JSON.stringify(favorites));
                 updateFavoriteButton(movieId, false);
                 alert('Фильм удален локально из-за ошибки сервера.');
             }
         });
-
-        // Имитация через setTimeout
-        /*
-        setTimeout(() => {
-            favorites = favorites.filter(id => id !== movieId);
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            updateFavoriteButton(movieId, false);
-        }, 500);
-        */
     }
 
     // Обновление кнопки избранного
     function updateFavoriteButton(movieId, isFavorited) {
         const $btn = $(`.fav-btn[data-id="${movieId}"]`);
         if ($btn.length === 0) {
-            // Если кнопка не найдена, найти по ближайшему li
             const $li = $(`#movie-list li[data-id="${movieId}"]`);
             const $newBtn = $li.find('.fav-btn');
             $newBtn.text(isFavorited ? 'В избранном' : 'Добавить в избранное');
@@ -128,7 +93,7 @@ $(document).ready(function() {
         }
     }
 
-    // Переопределение рендера фильмов для поддержки data-id
+    // Рендер фильмов
     function renderMovies(moviesToRender) {
         $('#movie-list').empty();
         moviesToRender.forEach(movie => {
@@ -149,11 +114,15 @@ $(document).ready(function() {
             `;
             $('#movie-list').append(movieHtml);
         });
-        // Применить фильтры после рендера
         filterMovies();
     }
 
-    // Переопределение обработчика избранного
+    // Заглушка-функция фильтрации (если у тебя она не определена)
+    function filterMovies() {
+        // Реализуй, если нужно фильтровать вручную
+    }
+
+    // Обработчик избранного
     $(document).on('click', '.fav-btn', function() {
         const movieId = parseInt($(this).data('id'));
         const isFavorited = favorites.includes(movieId);
@@ -164,7 +133,7 @@ $(document).ready(function() {
         }
     });
 
-    // Обновление списка избранного в модальном окне
+    // Обновление списка избранного
     function updateFavoritesList() {
         const $favList = $('#fav-list');
         $favList.empty();
@@ -183,7 +152,7 @@ $(document).ready(function() {
         }
     }
 
-    // Переопределение показа модального окна избранного
+    // Показ модального окна избранного
     $('#show-fav-btn').click(function(e) {
         e.preventDefault();
         updateFavoritesList();
