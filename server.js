@@ -66,21 +66,31 @@ app.get('/api/movies', (req, res) => {
 // Роут для добавления в избранное
 app.post('/api/favorites', async (req, res) => {
   const { movieId } = req.body;
-
-  // Проверка, существует ли фильм
-  const movieExists = db.movies.some(movie => movie.id === movieId);
+  console.log('POST /api/favorites, movieId:', movieId, 'type:', typeof movieId); // Лог
+  console.log('Текущие favorites:', db.favorites, 'types:', db.favorites.map(id => typeof id)); // Лог
+  if (!movieId || isNaN(movieId)) {
+      console.error('Некорректный movieId:', movieId);
+      return res.status(400).json({ error: 'Некорректный movieId' });
+  }
+  const movieIdNum = parseInt(movieId); // Приводим к числу
+  const movieExists = db.movies.some(movie => movie.id === movieIdNum);
   if (!movieExists) {
-    return res.status(404).json({ error: 'Фильм не найден' });
+      console.error('Фильм не найден:', movieIdNum);
+      return res.status(404).json({ error: 'Фильм не найден' });
   }
-
-  // Проверка, не добавлен ли уже
-  if (db.favorites.includes(movieId)) {
-    return res.status(400).json({ error: 'Фильм уже в избранном' });
+  if (db.favorites.includes(movieIdNum)) {
+      console.error('Фильм уже в избранном:', movieIdNum, 'favorites:', db.favorites);
+      return res.status(400).json({ error: 'Фильм уже в избранном' });
   }
-
-  db.favorites.push(movieId);
-  await saveData();
-  res.json({ success: true });
+  db.favorites.push(movieIdNum);
+  try {
+      await saveData();
+      console.log('Фильм добавлен в избранное:', movieIdNum, 'новые favorites:', db.favorites);
+      res.json({ success: true });
+  } catch (error) {
+      console.error('Ошибка сохранения:', error);
+      res.status(500).json({ error: 'Ошибка сервера при сохранении' });
+  }
 });
 
 // Роут для удаления из избранного
