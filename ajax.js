@@ -25,3 +25,54 @@ $(document).ready(function() {
                 }
             }
         });
+
+        // Имитация через setTimeout (для тестирования без API)
+        /*
+        setTimeout(() => {
+            const mockMovies = JSON.parse(localStorage.getItem('movies') || '[]');
+            if (mockMovies.length > 0) {
+                movies = mockMovies;
+                renderMovies(movies);
+            } else {
+                alert('Нет данных для загрузки!');
+            }
+        }, 500);
+        */
+    }
+     // Функция для добавления в избранное (POST-запрос)
+    function addToFavorites(movieId) {
+        $.ajax({
+            url: 'http://localhost:3000/favorites',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ movieId }),
+            success: function(data) {
+                if (!favorites.includes(movieId)) {
+                    favorites.push(movieId);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    updateFavoriteButton(movieId, true);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка добавления в избранное:', textStatus, errorThrown);
+                // Fallback на localStorage
+                if (!favorites.includes(movieId)) {
+                    favorites.push(movieId);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    updateFavoriteButton(movieId, true);
+                }
+                alert('Фильм добавлен локально из-за ошибки сервера.');
+            }
+        });
+
+        // Имитация через setTimeout
+        /*
+        setTimeout(() => {
+            if (!favorites.includes(movieId)) {
+                favorites.push(movieId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButton(movieId, true);
+            }
+        }, 500);
+        */
+    }
