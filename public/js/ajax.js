@@ -29,6 +29,9 @@ $(document).ready(function() {
         });
       }
 
+      $('#title-filter, #genre-filter').on('input change', function() {
+        loadMovies(); // Перезагружаем фильмы при изменении фильтров
+      });
         // Имитация через setTimeout (для тестирования без API)
         /*
         setTimeout(() => {
